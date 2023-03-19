@@ -1,4 +1,4 @@
-#code for question 1
+
 import numpy as np
 from scipy import optimize
 from types import SimpleNamespace
