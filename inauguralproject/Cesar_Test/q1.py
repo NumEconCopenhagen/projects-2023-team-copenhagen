@@ -39,19 +39,34 @@ class Rate_Work_at_Home:
         C = par.wfemale*LF + par.wmale*LM
         #output house
         #we need to create a condition so the prod. function changes depending on the value of epsilon
+        #utility
         for sigma in par.sigma:
                 if sigma == 1.0:
                     for alpha in par.alpha:
                         H = HM**(1-alpha) * HF**alpha   
-                        return H    
+                        Q = C**par.omega * H**(1-par.omega)
+                        
+                        #now we have the value of Q so we can calculate the utility
+                        utility = np.fmax(Q,1e-8)**(1-par.rho) / (1-par.rho)
                 else:
                     for alpha in par.alpha:
                         H = ((1-alpha)*HM**((sigma-1)/sigma) + alpha*HF**((sigma-1)/sigma))**(sigma/(sigma-1))
-                        return H
+                        Q = C**par.omega * H**(1-par.omega)
+                        
+                        #now we have the value of Q so we can calculate the utility
+                        utility = np.fmax(Q,1e-8)**(1-par.rho) / (1-par.rho) 
+                        #the 1e-8 is for the case that we have a Q zero so in this case it is not zero
+
+        #disutility
+        #total time in work
+        TM = LM + HM
+        TF = LF + HF
+        total_eps = 1 + (1/par.epsilon) #this is just to save space
+        disutility = -par.nu * ((TM**total_eps)/total_eps + (TF**total_eps)/total_eps)
+
+        #return the max condition
+        utility - 
         
-        #total output
-        Q = C**par.omega * H**(1-par.omega)
-    
     #create a function for the discrete problem
     #so in order to have the values of L,H we need to apply the formula given inthe PDF and then put that numbers in the zero vectors
     def solve_discrete(self,do_print=False):
@@ -71,7 +86,7 @@ class Rate_Work_at_Home:
         HF = HF.ravel()
 
         # b. calculate utility
-        u = self.calc_utility(LM,HM,LF,HF)
+        u = self.utility(LM,HM,LF,HF)
     
         # c. set to minus infinity if constraint is broken
         I = (LM+HM > 24) | (LF+HF > 24) # | is "or"
