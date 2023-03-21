@@ -65,9 +65,8 @@ class Rate_Work_at_Home:
         disutility = -par.nu * ((TM**total_eps)/total_eps + (TF**total_eps)/total_eps)
 
         #return the max condition
-        utility - 
-        
-    #create a function for the discrete problem
+        utility 
+        #create a function for the discrete problem
     #so in order to have the values of L,H we need to apply the formula given inthe PDF and then put that numbers in the zero vectors
     def solve_discrete(self,do_print=False):
         """ solve model discretely """

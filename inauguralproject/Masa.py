@@ -112,12 +112,13 @@ class HouseholdSpecializationModelClass:
 
     def solve(self,do_print=False):
         """ solve model continously """
+
         par = self.par
         sol = self.sol
         opt = SimpleNamespace()
-        N=1000
+        
         # a. all possible choices
-        x = np.linspace(0,24,N)
+        x = np.linspace(0,24,25)
         LM,HM,LF,HF = np.meshgrid(x,x,x,x) # all combinations
     
         LM = LM.ravel() # vector
@@ -147,9 +148,7 @@ class HouseholdSpecializationModelClass:
 
         return opt
 
-        
-           
-
+              
     def solve_wF_vec(self,discrete=False):
         """ solve model for vector of female wages """
          
