@@ -6,7 +6,7 @@ from scipy import optimize
 import pandas as pd 
 import matplotlib.pyplot as plt
 
-class HouseholdSpecializationModelClass:
+class HouseholdSpecializationModelClass2:
 
     def __init__(self):
         """ setup model """
@@ -23,7 +23,7 @@ class HouseholdSpecializationModelClass:
 
         # c. household production
         par.alpha = 0.5
-        par.sigma = 1.0
+        par.sigma = 1
 
         # d. wages
         par.wM = 1.0
@@ -53,10 +53,19 @@ class HouseholdSpecializationModelClass:
         C = par.wM*LM + par.wF*LF
 
         # b. home production
-        H = HM**(1-par.alpha)*HF**par.alpha
+        #for this it depends on the values of the epsilon
+        if par.sigma == 0:
+            H = np.fmin(HF,HM)
+        elif par.sigma == 1:
+            H = HM**(1-par.alpha) * HF**par.alpha   
+            Q = C**par.omega * H**(1-par.omega)
+        else:
+            H = ((1-par.alpha)*HM**((par.sigma-1)/par.sigma) + par.alpha*HF**((par.sigma-1)/par.sigma))**(par.sigma/(par.sigma-1))
+            Q = C**par.omega * H**(1-par.omega)
+
 
         # c. total consumption utility
-        Q = C**par.omega*H**(1-par.omega)
+        #Q = C**par.omega*H**(1-par.omega)
         utility = np.fmax(Q,1e-8)**(1-par.rho)/(1-par.rho)
 
         # d. disutlity of work
@@ -93,10 +102,10 @@ class HouseholdSpecializationModelClass:
         # d. find maximizing argument
         j = np.argmax(u)
         
-        opt.LM = LM[j]
-        opt.HM = HM[j]
-        opt.LF = LF[j]
-        opt.HF = HF[j]
+        opt.LM = np.log(LM[j])
+        opt.HM = np.log(HM[j])
+        opt.LF = np.log(LF[j])
+        opt.HF = np.log(HF[j])
 
         # e. print
         if do_print:
@@ -105,13 +114,41 @@ class HouseholdSpecializationModelClass:
 
         return opt
 
-    def solve(self,do_print=False):
+    def solve_continous(self,do_print=False):
         """ solve model continously """
+        par = self.par
+        sol = self.sol
+        opt = SimpleNamespace()
 
-        pass    
+        #we need to present our objective function that we want to maximize
+        def objective_f(x):
+            return -self.calc_utility(x[0], x[1], x[2], x[3])
+        
+        #now we need to presnet our constraints
+        constraint1 = lambda x: 24 - x[0] - x[1]
+        constraint2 = lambda x: 24 - x[2] - x[3]
+        constraints = ({'type': 'ineq', 'fun': constraint1},{'type': 'ineq', 'fun': constraint2})
+
+        #now make the guess of the values
+        guess = [12,12,12,12]
+
+        #now create the boundaries for the values 
+        bounds = ((0,24),(0,24),(0,24),(0,24))
+
+        #now create the minimize function with the previous parameters
+        solution = optimize.minimize(objective_f,guess,method='SLSQP',bounds=bounds,constraints=constraints)
+        
+        #give the final values to the variables
+        opt.LM = solution.x[0]
+        opt.HM = solution.x[1]
+        opt.LF = solution.x[2]
+        opt.HF = solution.x[3]
+        
+        return opt
 
     def solve_wF_vec(self,discrete=False):
         """ solve model for vector of female wages """
+
 
         pass
 
