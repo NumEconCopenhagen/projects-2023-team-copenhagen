@@ -1,16 +1,5 @@
-def keep_regs(df, regs):
-    """ Example function. Keep only the subset regs of regions in data.
-
-    Args:
-        df (pd.DataFrame): pandas dataframe 
-
-    Returns:
-        df (pd.DataFrame): pandas dataframe
-
-    """ 
+def plot_e(df, country): 
+    I = df['country'] == country
+    ax=df.loc[I,:].plot(x='year', y='rec_demean', style='-o', legend=False)
+    ax=df.loc[I,:].plot(x='year', y='gdp_demean', style='-o', legend=False)
     
-    for r in regs:
-        I = df.reg.str.contains(r)
-        df = df.loc[I == False] # keep everything else
-    
-    return df
