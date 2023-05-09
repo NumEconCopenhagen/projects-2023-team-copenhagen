@@ -1,7 +1,7 @@
-# \[Group name\]
+# \[team copenhagen\]
 
 **Group members:**
-- A Masa
+- A Masato Isaji
 - B César
 
 
