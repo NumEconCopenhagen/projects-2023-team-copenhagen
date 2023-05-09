@@ -2,7 +2,8 @@
 
 **Group members:**
 - A Masato Isaji
-- B César
+- B César Arriaga Trujillo
+
 
 
 This repository contains  
