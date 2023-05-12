@@ -53,8 +53,13 @@ class Merge:
         
         bounds = (0,13)
 
+<<<<<<< HEAD:modelproject/cournot_merge.py
         cons1 = lambda x: 13-x[0] #this constraint means that if the firm satisfies all the demand is because they sell at 0 price the good
         constraint = ({'type': 'ineq','fun': cons1})
+=======
+        #cons1 = lambda x: 13-x[0] #this constraint means that if the firm satisfies all the demand is because they sell at 0 price the good
+        #constraint = ({'type': 'ineq','fun': cons1})
+>>>>>>> f842ba29abd44ba9f47eac458b34b5ca90995764:modelproject/merge_cournot.py
 
         guess = 6
 
@@ -82,6 +87,7 @@ class Merge:
 
         print(f'The total surplus is {self.total_surplus:.2f}, \
               the surplus for the mopoly is {self.monopoly:.2f} and \
+<<<<<<< HEAD:modelproject/cournot_merge.py
               the surplus of the consumers is {self.consumers:.2f}')
         
 class Mergegraph:
@@ -133,3 +139,6 @@ class Mergegraph:
         ax.legend(loc='upper right');
 
 
+=======
+              the surplus of the consumers is {self.consumers:.2f}')
+>>>>>>> f842ba29abd44ba9f47eac458b34b5ca90995764:modelproject/merge_cournot.py
