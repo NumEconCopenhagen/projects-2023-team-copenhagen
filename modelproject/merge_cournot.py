@@ -53,12 +53,9 @@ class Merge:
         
         bounds = (0,13)
 
-        cons1 = lambda x: 13-x[0] #this constraint means that if the firm satisfies all the demand is because they sell at 0 price the good
-        constraint = ({'type': 'ineq','fun': cons1})
-
         guess = 6
 
-        sol = optimize.minimize_scalar(objective,guess,bounds=bounds)
+        sol = optimize.minimize_scalar(objective,guess,bounds=bounds,method='bounded')
             
         self.Q = sol.x
 
