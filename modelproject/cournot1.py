@@ -104,7 +104,7 @@ class Merge:
 
         par = self.par
 
-        rev = (par.P-Q)*Q
+        rev = (self.par.P-Q)*Q
         cost = (par.c1*Q)-par.K #we suppose that the new cost is based on the most efficient firm
         profit = rev-cost
         return profit
@@ -146,7 +146,7 @@ class Merge:
         self.total_surplus = self.monopoly + self.consumers
 
         print(f'The total surplus is {self.total_surplus:.2f}, \
-              the surplus for the mopoly is {self.monopoly:.2f} and \
-              the surplus of the consumers is {self.consumers:.2f}')
+                the surplus for the mopoly is {self.monopoly:.2f} and \
+                the surplus of the consumers is {self.consumers:.2f}')
         
 
