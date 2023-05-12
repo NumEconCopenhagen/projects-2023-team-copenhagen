@@ -71,3 +71,6 @@ class Nash_Eq:
         self.q2 = sol.x[1]
 
         self.objective = -sol.fun #give the objective function the maximum value obtain by the optimize function
+        
+        print(f'The optimal output for Fimr 1 is: {self.q1:.2} units.')
+        print(f'The optimal output for Fimr 2 is: {self.q2:.2} units')
