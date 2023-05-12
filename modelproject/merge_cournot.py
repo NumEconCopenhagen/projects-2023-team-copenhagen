@@ -53,13 +53,8 @@ class Merge:
         
         bounds = (0,13)
 
-<<<<<<< HEAD
         cons1 = lambda x: 13-x[0] #this constraint means that if the firm satisfies all the demand is because they sell at 0 price the good
         constraint = ({'type': 'ineq','fun': cons1})
-=======
-        #cons1 = lambda x: 13-x[0] #this constraint means that if the firm satisfies all the demand is because they sell at 0 price the good
-        #constraint = ({'type': 'ineq','fun': cons1})
->>>>>>> 00030e687f086a2373245346a23b007efd2bfa5f
 
         guess = 6
 
@@ -87,9 +82,6 @@ class Merge:
 
         print(f'The total surplus is {self.total_surplus:.2f}, \
               the surplus for the mopoly is {self.monopoly:.2f} and \
-<<<<<<< HEAD
               the surplus of the consumers is {self.consumers:.2f}')
         
-=======
-              the surplus of the consumers is {self.consumers:.2f}')
->>>>>>> 00030e687f086a2373245346a23b007efd2bfa5f
+
