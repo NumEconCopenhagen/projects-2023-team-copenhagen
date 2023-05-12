@@ -137,3 +137,5 @@ class Nash_Eq:
 
         print(f'The optimal output for Fimr 1 is: {self.q1:.2f} units.')
         print(f'The optimal output for Fimr 2 is: {self.q2:.2f} units')
+
+
