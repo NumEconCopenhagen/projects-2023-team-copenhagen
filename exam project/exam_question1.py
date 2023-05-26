@@ -37,7 +37,7 @@ def optimal_labor_supply(alpha,nu,kappa,tau,wage):
 def expected_L(kappa,alpha,nu,tax_wage):
     return (-kappa+(kappa**2 +4*(alpha/nu)*tax_wage**2)**(1/2))/(2*tax_wage)
 
-def gov_endogenous(alpha,nu,kappa,tau,wage,L):
+def gov_endogenous(alpha,nu,kappa,tau,wage):
     """This function shows the gov consumption when it chooses the tax rate"""
     
     L = optimal_labor_supply(alpha,nu,kappa,tau,wage)
